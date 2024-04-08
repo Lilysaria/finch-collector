@@ -1,11 +1,28 @@
 from django.db import models
 from django.urls import reverse
+
+
+
+# you can access the cat with cat_set when you have toy
+class Toy(models.Model):
+    name = models.CharField(max_length=50)
+    color = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('toys_detail', kwargs={'pk': self.id})
+
+
 class Finch(models.Model):
     name = models.CharField(max_length=100)
     species = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     migration_patterns = models.TextField()
     habitat = models.CharField(max_length=100)
+       # add a Many to Many field
+    toys = models.ManyToManyField(Toy)
     
     def __str__(self):
         return self.name

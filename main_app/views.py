@@ -17,7 +17,7 @@ class FinchDelete(DeleteView):
 
 class FinchCreate(CreateView):
     model = Finch
-    fields = '__all__'
+    fields = ['species', 'description', 'migration_patterns', 'habitat']
 
 def home(request):
     return render(request, 'home.html')
